@@ -1,2 +1,2 @@
 # micro_webshop
-This is a maven module based project
+This is a microservices webshop
