@@ -4,7 +4,10 @@ import io.swagger.model.Category;
 import io.swagger.model.Error;
 
 import io.swagger.annotations.*;
+import io.swagger.manager.CategoryManager;
+import io.swagger.manager.CategoryManagerImpl;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,22 +17,35 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-20T13:50:47.978Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-25T10:28:45.312Z")
 
 @Controller
 public class CategoriesApiController implements CategoriesApi {
 
-    public ResponseEntity<List<Category>> categoriesGet(@ApiParam(value = "Searches for all products with the given name.") @RequestParam(value = "name", required = false) String name
+    public ResponseEntity<List<Category>> categoriesGet(@ApiParam(value = "Searches for all categories with the given name.") @RequestParam(value = "name", required = false) String name
 
 
 
 ) {
-        // do some magic!
-        return new ResponseEntity<List<Category>>(HttpStatus.OK);
+    	CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();    	
+    	List<Category> categoryByName = categoryManager.getCategoryByName(name);
+    	HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(categoryByName, headers, HttpStatus.FOUND);
+    }
+
+    public ResponseEntity<Object> categoriesIdDelete(
+@ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id
+
+
+) {
+    	CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();   
+    	categoryManager.delCategory(id);
+        return new ResponseEntity<Object>(HttpStatus.OK);
     }
 
     public ResponseEntity<Object> categoriesIdGet(
@@ -37,21 +53,26 @@ public class CategoriesApiController implements CategoriesApi {
 
 
 ) {
-        // do some magic!
-        return new ResponseEntity<Object>(HttpStatus.OK);
+        
+     	CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();    	
+    	Category category = categoryManager.getCategory(id);
+    	HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(category, headers, HttpStatus.FOUND);
     }
 
-    public ResponseEntity<Object> categoriesIdPost(
+    public ResponseEntity<Object> categoriesIdPut(
 @ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id
 
 
 ,
-        @ApiParam(value = "Delete Category.") @RequestParam(value = "delete", required = false) Integer delete
+        
 
-
+@ApiParam(value = "Category that will be added"  ) @RequestBody Category category
 
 ) {
         // do some magic!
+    	CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();   
+    	categoryManager.addCategory(category);        
         return new ResponseEntity<Object>(HttpStatus.OK);
     }
 
