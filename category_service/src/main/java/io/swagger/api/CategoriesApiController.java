@@ -27,16 +27,6 @@ import java.util.List;
 @Controller
 public class CategoriesApiController implements CategoriesApi {
 
-    public ResponseEntity<List<Category>> categoriesGet(@ApiParam(value = "Searches for all categories with the given name.") @RequestParam(value = "name", required = false) String name
-
-
-
-) {
-    	CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();    	
-    	List<Category> categoryByName = categoryManager.getCategoryByName(name);
-    	HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(categoryByName, headers, HttpStatus.FOUND);
-    }
 
     public ResponseEntity<Object> categoriesIdDelete(
 @ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id

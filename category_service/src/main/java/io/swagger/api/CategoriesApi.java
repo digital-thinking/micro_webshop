@@ -21,17 +21,7 @@ import java.util.List;
 @Api(value = "categories", description = "the categories API")
 public interface CategoriesApi {
 
-    @ApiOperation(value = "List of Categories", notes = "List of all Categories from the webshop ", response = Category.class, responseContainer = "List", tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "A Category", response = Category.class),
-        @ApiResponse(code = 200, message = "Unexpected error", response = Category.class) })
-    @RequestMapping(value = "/categories",
-        method = RequestMethod.GET)
-    ResponseEntity<List<Category>> categoriesGet(@ApiParam(value = "Searches for all products with the given name.") @RequestParam(value = "name", required = false) String name
-
-
-
-);
+   
 
 
     @ApiOperation(value = "", notes = "delete Category ", response = Object.class, tags={  })
