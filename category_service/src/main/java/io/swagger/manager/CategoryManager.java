@@ -10,8 +10,6 @@ public interface CategoryManager {
 	
 	public Category getCategory(int id);
 	
-	public List<Category> getCategoryByName(String name);
-	
 	public void addCategory(Category cat);
 	
 	public void delCategory(int id);

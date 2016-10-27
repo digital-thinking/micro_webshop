@@ -22,12 +22,6 @@ public class CategoryManagerImpl implements CategoryManager {
 	}
 
 	@Override
-	public List<Category> getCategoryByName(String name) {
-		return storage.values().stream().filter(item -> item.getName().equals(name)).collect(Collectors.toList());	
-
-	}
-
-	@Override
 	public void addCategory(Category cat) {
 		storage.put(cat.getId(), cat);
 
