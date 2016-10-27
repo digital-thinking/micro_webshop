@@ -3,6 +3,8 @@ package io.swagger.api;
 import io.swagger.model.Product;
 
 import io.swagger.annotations.*;
+import io.swagger.manager.ProductManager;
+import io.swagger.manager.ProductManagerImpl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-20T14:33:20.613Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-24T14:07:33.320Z")
 
 @Controller
 public class AddProductApiController implements AddProductApi {
@@ -27,7 +29,8 @@ public class AddProductApiController implements AddProductApi {
 @ApiParam(value = "Product that will be added"  ) @RequestBody Product product
 
 ) {
-        // do some magic!
+    	ProductManager productManager = ProductManagerImpl.getSingletonMockSuperUgly();    	
+    	productManager.addProduct(product.getName(), product.getPrice(), product.getCategory(), product.getDetails());
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
