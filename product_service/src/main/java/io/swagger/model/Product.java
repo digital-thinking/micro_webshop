@@ -13,14 +13,14 @@ import java.math.BigDecimal;
 /**
  * Product
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-20T14:33:20.613Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-24T14:07:33.320Z")
 
 public class Product   {
   private Integer id = null;
 
   private String name = null;
 
-  private BigDecimal price = null;
+  private double price = 0.0;
 
   private Integer category = null;
 
@@ -62,7 +62,7 @@ public class Product   {
     this.name = name;
   }
 
-  public Product price(BigDecimal price) {
+  public Product price(double price) {
     this.price = price;
     return this;
   }
@@ -72,11 +72,11 @@ public class Product   {
    * @return price
   **/
   @ApiModelProperty(value = "Price of product.")
-  public BigDecimal getPrice() {
+  public double getPrice() {
     return price;
   }
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(double price) {
     this.price = price;
   }
 
