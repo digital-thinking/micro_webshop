@@ -1,15 +1,19 @@
 package io.swagger;
 
 import org.springframework.boot.CommandLineRunner;
+
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
+@EnableDiscoveryClient
 @ComponentScan(basePackages = "io.swagger")
 public class Swagger2SpringBoot implements CommandLineRunner {
 
