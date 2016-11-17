@@ -1,11 +1,14 @@
 package io.swagger.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 
 
 
@@ -15,15 +18,24 @@ import java.math.BigDecimal;
  */
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-24T14:07:33.320Z")
 
+@Entity
+@Table(name="product")
 public class Product   {
+	@GeneratedValue
+	@Id
+	@Column(name="id")
   private Integer id = null;
 
+	@Column(name="name")
   private String name = null;
 
+	@Column(name="price")
   private double price = 0.0;
 
+	@Column(name="category_id")
   private Integer category = null;
 
+	@Column(name="details")
   private String details = null;
 
   public Product id(Integer id) {

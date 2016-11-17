@@ -19,51 +19,6 @@ import java.util.List;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-25T10:28:45.312Z")
 
 @Api(value = "categories", description = "the categories API")
-public interface CategoriesApi {
+public interface CategoriesApi extends org.springframework.data.repository.CrudRepository<Category, Integer> {
 
-   
-
-
-    @ApiOperation(value = "", notes = "delete Category ", response = Object.class, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Category deleted", response = Object.class),
-        @ApiResponse(code = 200, message = "Unexpected error", response = Object.class) })
-    @RequestMapping(value = "/categories/{id}",
-        method = RequestMethod.DELETE)
-    ResponseEntity<Object> categoriesIdDelete(
-@ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id
-
-
-);
-
-
-    @ApiOperation(value = "Category", notes = "A Category of the shop ", response = Object.class, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "A category", response = Object.class),
-        @ApiResponse(code = 200, message = "Unexpected error", response = Object.class) })
-    @RequestMapping(value = "/categories/{id}",
-        method = RequestMethod.GET)
-    ResponseEntity<Object> categoriesIdGet(
-@ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id
-
-
-);
-
-
-    @ApiOperation(value = "", notes = "update Category ", response = Object.class, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Category updated", response = Object.class),
-        @ApiResponse(code = 200, message = "Unexpected error", response = Object.class) })
-    @RequestMapping(value = "/categories/{id}",
-        method = RequestMethod.PUT)
-    ResponseEntity<Object> categoriesIdPut(
-@ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id
-
-
-,
-
-@ApiParam(value = "Category that will be added"  ) @RequestBody Category category
-
-);
-
-}
+	Iterable<Category> findOneByName(String name);}

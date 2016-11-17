@@ -1,6 +1,9 @@
 package io.swagger.model;
 
 import java.util.Objects;
+
+import javax.persistence.*;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -14,11 +17,18 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-20T14:40:13.830Z")
 
+@Entity
+@Table(name ="role")
 public class Role   {
+	@GeneratedValue
+	@Id
+	@Column(name="id")
   private Integer id = null;
 
+	@Column(name = "type")
   private String typ = null;
 
+	@Column(name = "level1")
   private Integer level = null;
 
   public Role id(Integer id) {

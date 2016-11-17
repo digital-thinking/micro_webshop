@@ -1,9 +1,9 @@
 package io.swagger.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
+
+import javax.persistence.*;
+
 import io.swagger.annotations.ApiModelProperty;
 
 
@@ -14,9 +14,15 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-25T10:28:45.312Z")
 
+@Entity
+@Table(name="category")
 public class Category   {
+	@GeneratedValue
+	@Id
+	@Column(name="id")
   private Integer id = null;
 
+	@Column(name="name")
   private String name = null;
 
   public Category id(Integer id) {

@@ -1,6 +1,16 @@
 package io.swagger.model;
 
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -14,17 +24,27 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-20T14:40:13.830Z")
 
-public class User   {
+@Entity
+@Table(name = "Customer")
+public class User  {
+	@Id
+	@GeneratedValue
+	@Column(name="id")
   private Integer id = null;
 
+	@Column(name="username")
   private String username = null;
 
+	@Column(name="name")
   private String name = null;
 
+	@Column(name="lastname")
   private String lastname = null;
 
+	@Column(name="password")
   private String password = null;
 
+	@Column(name="role")
   private Integer role = null;
 
   public User id(Integer id) {
