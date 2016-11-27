@@ -58,5 +58,16 @@ public class UsersApiController{
 		
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
+	
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+    public ResponseEntity<Object> GetUsers() {
+        Iterable<User> users = usersApi.findAll();
+        
+        if(users != null && users.iterator().hasNext()){
+        	return new ResponseEntity<Object>(users, HttpStatus.OK);
+        } else {
+        	return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+        }
+    }
 
 }
