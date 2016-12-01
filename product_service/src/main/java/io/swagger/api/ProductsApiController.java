@@ -43,11 +43,10 @@ public class ProductsApiController {
 	        @ApiParam(value = "Searches for all products which are less expencive than given value.") @RequestParam(value = "searchmax", required = false) Integer searchmax,
 	        @ApiParam(value = "Lists all products with this name.") @RequestParam(value = "name", required = false) String name) 
     {
-		// TODO Implementierung
-		
-		
-		return new ResponseEntity<Object>(HttpStatus.OK);
+		return new ResponseEntity<Object>(productsApi.findAll(), HttpStatus.OK);
 	}
+	
+	
 	
 	
 	@RequestMapping(value = "/products", produces = { "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)

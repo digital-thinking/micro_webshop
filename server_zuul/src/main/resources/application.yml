@@ -11,3 +11,4 @@ zuul:
   ignoredServices: '*'
   routes:
     user-proxy: /user-api/**
+    product-proxy: /product-api/**

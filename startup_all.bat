@@ -18,3 +18,8 @@ cd ..
 
 cd user_proxy 
 start mvn spring-boot:run
+cd ..
+
+cd product_proxy 
+start mvn spring-boot:run
+cd ..
