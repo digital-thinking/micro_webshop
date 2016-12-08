@@ -35,7 +35,7 @@ public class ProductClient {
 	@HystrixCommand(fallbackMethod = "getProductCache", commandProperties = {
 			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public Product getProduct(Long productId) {
-		Product tmpproduct = restTemplate.getForObject("http://product-service/v1/product/" + productId, Product.class);
+		Product tmpproduct = restTemplate.getForObject("http://product-service/v1/products/" + productId, Product.class);
 		productCache.putIfAbsent(productId, tmpproduct);
 		return tmpproduct;
 	}

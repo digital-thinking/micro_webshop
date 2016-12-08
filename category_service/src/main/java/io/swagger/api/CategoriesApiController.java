@@ -23,120 +23,92 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
-
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2016-10-25T10:28:45.312Z")
 
 @Controller
 public class CategoriesApiController {
-	
+
 	@Autowired
 	private CategoriesApi categoriesApi;
-	
+
 	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> GetCategoryById(@ApiParam(value = "The id of the category",required=true) @PathVariable("id") Integer id) {
-		
-		categoriesApi.findOne(id);
-		
-		return new ResponseEntity<Object>(HttpStatus.OK);
+	public ResponseEntity<Object> GetCategoryById(
+			@ApiParam(value = "The id of the category", required = true) @PathVariable("id") Integer id) {
+
+		Category c =categoriesApi.findOne(id);
+
+		return new ResponseEntity<Object>(c, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/categories/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> DeleteCategoryById(@ApiParam(value = "The id of the category",required=true) @PathVariable("id") Integer id) {
+	public ResponseEntity<Object> DeleteCategoryById(
+			@ApiParam(value = "The id of the category", required = true) @PathVariable("id") Integer id) {
 		categoriesApi.delete(id);
-		
+
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/categories", method = RequestMethod.POST)
-    public ResponseEntity<Object> AddCategory(@ApiParam(value = "The id of the category",required=true) @RequestBody Category category) {
-		
+	public ResponseEntity<Object> AddCategory(
+			@ApiParam(value = "The id of the category", required = true) @RequestBody Category category) {
+
 		// TODO Implementierung
-		
+		categoriesApi.save(category);
+
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
-	
+
+	@RequestMapping(value = "/categories/{name}", method = RequestMethod.GET)
+	public ResponseEntity<Object> GetCategories(
+			@ApiParam(value = "The id of the category", required = false) @PathVariable("name") String name) {
+		
+			Iterable<Category> categories = categoriesApi.findOneByName(name);
+			return new ResponseEntity<Object>(categories, HttpStatus.OK);
+		
+	}
 	
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
-    public ResponseEntity<Object> GetCategories(@ApiParam(value = "The id of the category",required=false) @PathVariable("name") String name) {
-		
-		if(name == null){			
+	public ResponseEntity<Object> GetCategories() {
+	
 			Iterable<Category> allCategories = categoriesApi.findAll();
-			
-			return new ResponseEntity<Object>(allCategories, HttpStatus.OK);		
-		} else {
-			Iterable<Category> categories = categoriesApi.findOneByName(name);
-			
-			return new ResponseEntity<Object>(categories, HttpStatus.OK);
-		}
+			return new ResponseEntity<Object>(allCategories, HttpStatus.OK);
+		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	// ################### MOCKUP METHODEN ########################
 
+	public ResponseEntity<Object> categoriesIdDelete(
+			@ApiParam(value = "ID of Category.", required = true) @PathVariable("id") Integer id
 
-    public ResponseEntity<Object> categoriesIdDelete(
-@ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id
+	) {
+		CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();
+		categoryManager.delCategory(id);
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
 
+	public ResponseEntity<Object> categoriesIdGet(
+			@ApiParam(value = "ID of Category.", required = true) @PathVariable("id") Integer id
 
-) {
-    	CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();   
-    	categoryManager.delCategory(id);
-        return new ResponseEntity<Object>(HttpStatus.OK);
-    }
+	) {
 
-    public ResponseEntity<Object> categoriesIdGet(
-@ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id
+		CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();
+		Category category = categoryManager.getCategory(id);
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(category, headers, HttpStatus.FOUND);
+	}
 
+	public ResponseEntity<Object> categoriesIdPut(
+			@ApiParam(value = "ID of Category.", required = true) @PathVariable("id") Integer id
 
-) {
-        
-     	CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();    	
-    	Category category = categoryManager.getCategory(id);
-    	HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(category, headers, HttpStatus.FOUND);
-    }
+			,
 
-    public ResponseEntity<Object> categoriesIdPut(
-@ApiParam(value = "ID of Category.",required=true ) @PathVariable("id") Integer id
+			@ApiParam(value = "Category that will be added") @RequestBody Category category
 
-
-,
-        
-
-@ApiParam(value = "Category that will be added"  ) @RequestBody Category category
-
-) {
-        // do some magic!
-    	CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();   
-    	categoryManager.addCategory(category);        
-        return new ResponseEntity<Object>(HttpStatus.OK);
-    }
+	) {
+		// do some magic!
+		CategoryManager categoryManager = CategoryManagerImpl.getSingletonMockSuperUgly();
+		categoryManager.addCategory(category);
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
 
 }

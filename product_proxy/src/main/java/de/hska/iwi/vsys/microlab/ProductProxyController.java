@@ -1,5 +1,7 @@
 package de.hska.iwi.vsys.microlab;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.http.HttpStatus;
@@ -15,15 +17,31 @@ public class ProductProxyController {
 
 	@Autowired
 	private ProductClient productClient;
+	
+	@Autowired
+	private CategoryClient categoryClient;
 
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
-	public ResponseEntity<Iterable<Product>> getProducts() {
-		return new ResponseEntity<Iterable<Product>>(productClient.getProducts(), HttpStatus.OK);
+	public ResponseEntity<Iterable<ProductCategoryDTO>> getProducts() {
+		//TODO return ProductCategoryDTO
+		return new ResponseEntity<Iterable<ProductCategoryDTO>>(Collections.emptyList(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.GET)
-	public ResponseEntity<Product> getProducts(@PathVariable Long productId) {
-		return new ResponseEntity<>(productClient.getProduct(productId), HttpStatus.OK);
+	public ResponseEntity<ProductCategoryDTO> getProducts(@PathVariable Long productId) {
+		ProductCategoryDTO dto = null;
+		Product p = productClient.getProduct(productId);
+		if (p != null)
+		{
+			Category c = categoryClient.getCategory(p.getCategory());
+			if  (c != null){
+			 dto = new ProductCategoryDTO(p, c);
+			}
+		}
+		
+		
+		//TODO return ProductCategoryDTO
+		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
 }

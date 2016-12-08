@@ -1,26 +1,21 @@
 package de.hska.iwi.vsys.microlab;
 
-public class Product {
+public class ProductCategoryDTO {
 
 	private Long id;
 	private String name;
 	private String details;
 	private double price;
-	public double getPrice() {
-		return price;
-	}
+	private Category category;
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+	public ProductCategoryDTO(){}
 
-	private int category;
-
-	public Product(){}
-
-	public Product(Long id, String name) {
-		this.id = id;
-		this.name = name;
+	public ProductCategoryDTO(Product p, Category c) {
+		this.id = p.getId();
+		this.name = p.getName();
+		this.details = p.getDetails();
+		this.price = p.getPrice();
+		this.category = c;
 	}
 
 	public Long getId() {
@@ -44,11 +39,11 @@ public class Product {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price + "]";
 	}
 
-	public int getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(int category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
