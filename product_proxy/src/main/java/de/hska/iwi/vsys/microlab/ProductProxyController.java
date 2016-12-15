@@ -34,7 +34,7 @@ public class ProductProxyController {
 		if (p != null)
 		{
 			Category c = categoryClient.getCategory(p.getCategory());
-			if  (c != null){
+			if  (c != null && c.getId() != null){
 			 dto = new ProductCategoryDTO(p, c);
 			}
 		}

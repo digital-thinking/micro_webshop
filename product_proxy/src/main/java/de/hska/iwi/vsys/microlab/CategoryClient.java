@@ -25,7 +25,7 @@ public class CategoryClient {
 			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public Iterable<Category> getCategorys() {
 		Collection<Category> cats = new HashSet<Category>();
-		Category[] tmpCategorys = restTemplate.getForObject("http://category-service/v1/categorys", Category[].class);
+		Category[] tmpCategorys = restTemplate.getForObject("http://category-service/v1/categories", Category[].class);
 		Collections.addAll(cats, tmpCategorys);
 		categoryCache.clear();
 		cats.forEach(u -> categoryCache.put(u.getId(), u));
@@ -35,7 +35,7 @@ public class CategoryClient {
 	@HystrixCommand(fallbackMethod = "getCategoryCache", commandProperties = {
 			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public Category getCategory(Integer categoryId) {
-		Category tmpCategory = restTemplate.getForObject("http://category-service/v1/category/" + categoryId,
+		Category tmpCategory = restTemplate.getForObject("http://category-service/v1/categories/" + categoryId,
 				Category.class);
 		categoryCache.putIfAbsent(categoryId, tmpCategory);
 		return tmpCategory;

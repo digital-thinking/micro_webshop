@@ -58,7 +58,7 @@ public class CategoriesApiController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/categories/{name}", method = RequestMethod.GET)
+	@RequestMapping(value = "/categories/byname/{name}", method = RequestMethod.GET)
 	public ResponseEntity<Object> GetCategories(
 			@ApiParam(value = "The id of the category", required = false) @PathVariable("name") String name) {
 		
