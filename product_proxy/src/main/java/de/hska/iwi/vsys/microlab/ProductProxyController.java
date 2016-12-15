@@ -1,5 +1,6 @@
 package de.hska.iwi.vsys.microlab;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,20 @@ public class ProductProxyController {
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public ResponseEntity<Iterable<ProductCategoryDTO>> getProducts() {
 		//TODO return ProductCategoryDTO
-		return new ResponseEntity<Iterable<ProductCategoryDTO>>(Collections.emptyList(), HttpStatus.OK);
+		ArrayList<ProductCategoryDTO> categoryDTOs = new ArrayList<>();
+		ProductCategoryDTO dto = null;
+		for (Product p : productClient.getProducts()){
+			if (p != null)
+			{
+				Category c = categoryClient.getCategory(p.getCategory());
+				if  (c != null && c.getId() != null){
+				 dto = new ProductCategoryDTO(p, c);
+				 categoryDTOs.add(dto);
+				}
+			}
+		}
+		
+		return new ResponseEntity<Iterable<ProductCategoryDTO>>(categoryDTOs, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.GET)
@@ -39,8 +53,6 @@ public class ProductProxyController {
 			}
 		}
 		
-		
-		//TODO return ProductCategoryDTO
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
