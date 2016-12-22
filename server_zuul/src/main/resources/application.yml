@@ -12,3 +12,5 @@ zuul:
   routes:
     user-proxy: /user-api/**
     product-proxy: /product-api/**
+  ConnectTimeout: 30000
+  ReadTimeout: 30000

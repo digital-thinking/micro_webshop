@@ -52,8 +52,7 @@ public class CategoriesApiController {
 	public ResponseEntity<Object> AddCategory(
 			@ApiParam(value = "The id of the category", required = true) @RequestBody Category category) {
 
-		// TODO Implementierung
-		categoriesApi.save(category);
+	    categoriesApi.save(category);
 
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}

@@ -1,0 +1,4 @@
+Product Model (Composite): Price
+Alle: save
+ProductProxy: delete
+ProductProxy: save

@@ -24,45 +24,43 @@ public class ProductsApiController {
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.GET)
 	public ResponseEntity<Object> GetProductById(@ApiParam(value = "The id of the product",required=true) @PathVariable("productId") Integer productId){
 		
-		Product product = productsApi.findOne(productId);
-		
+		Product product = productsApi.findOne(productId);		
 		return new ResponseEntity<Object>(product, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> DeleteProductById(@ApiParam(value = "The id of the product",required=true) @PathVariable("productId") Integer productId){
 		
-		productsApi.delete(productId);
-		
+		productsApi.delete(productId);		
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public ResponseEntity<Object> GetProducts(@ApiParam(value = "Searches for all products with the given string contained in the product descrption.") @RequestParam(value = "searchstring", required = false) String searchstring,
-	        @ApiParam(value = "Searches for all products which are more expencive than given value.") @RequestParam(value = "searchmin", required = false) Integer searchmin,
-	        @ApiParam(value = "Searches for all products which are less expencive than given value.") @RequestParam(value = "searchmax", required = false) Integer searchmax,
+	        @ApiParam(value = "Searches for all products which are more expencive than given value.") @RequestParam(value = "searchmin", required = false) Double searchmin,
+	        @ApiParam(value = "Searches for all products which are less expencive than given value.") @RequestParam(value = "searchmax", required = false) Double searchmax,
 	        @ApiParam(value = "Lists all products with this name.") @RequestParam(value = "name", required = false) String name) 
     {
-		return new ResponseEntity<Object>(productsApi.findAll(), HttpStatus.OK);
+		if (searchmin == null) searchmin = 0.0;
+		if (searchmax == null) searchmax = Double.MAX_VALUE;
+		if (name == null) name = "%";
+		if (searchstring == null) searchstring = "%";
+		return new ResponseEntity<Object>(productsApi.findByPriceBetweenAndNameLikeAndDetailsLike(searchmin, searchmax, name, searchstring), HttpStatus.OK);				
 	}
 	
 	
 	
 	
 	@RequestMapping(value = "/products", produces = { "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
-    public ResponseEntity<Void> AddUser(@ApiParam(value = "The product that will be added") @RequestBody Product product) {
-		
-		// TODO Implementierung
-		
+    public ResponseEntity<Void> AddUser(@ApiParam(value = "The product that will be added") @RequestBody Product product) {		
+		productsApi.save(product);		
 		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
+	}	
 	
-	// Das hier hab ich angepasst, da stand der Parameter im query und war nicht required, also falls das doch so gewollt war muss das wieder geändert werden
 	@RequestMapping(value = "/products/{categoryId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> DeleteProductsByCategory(@ApiParam(value = "The id of the categories",required=true) @PathVariable("categoryId") Integer categoryId){
 		
-		productsApi.deleteByCategory(categoryId);
-		
+		productsApi.deleteByCategory(categoryId);		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

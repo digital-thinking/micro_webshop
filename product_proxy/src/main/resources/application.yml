@@ -1,4 +1,6 @@
 server:
+  ConnectTimeout: 30000
+  ReadTimeout: 30000
   port: 8089
 spring:
   application:
