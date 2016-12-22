@@ -1,4 +1,8 @@
 Product Model (Composite): Price
-Alle: save
+Alle servies: save (update, add)
 ProductProxy: delete
-ProductProxy: save
+ProductProxy: search and filter 
+ProductProxy: save logik
+
+OAUTH2
+
