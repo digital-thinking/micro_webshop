@@ -1,8 +1,6 @@
-Product Model (Composite): Price
-Alle servies: save (update, add)
-ProductProxy: delete
-ProductProxy: search and filter 
-ProductProxy: save logik
+Product Model (Composite): Price -> Simon
+Alle servies: save (update, add) -> Sebastian
+ProductProxy -> Chris
 
 OAUTH2
 
