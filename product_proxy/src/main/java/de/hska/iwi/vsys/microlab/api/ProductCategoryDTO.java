@@ -54,5 +54,10 @@ public class ProductCategoryDTO {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+	
+	public double getPrice()
+	{
+		return this.price;
+	}
 
 }

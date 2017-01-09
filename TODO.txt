@@ -1,6 +1,7 @@
-Product Model (Composite): Price -> Simon
 Alle servies: save (update, add) -> Sebastian
 ProductProxy -> Chris
+UserProxy -> Simon
 
-OAUTH2
+OAUTH2 Server -> Chris
+OAUTH Client -> Alle
 
