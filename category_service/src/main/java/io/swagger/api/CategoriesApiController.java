@@ -44,7 +44,6 @@ public class CategoriesApiController {
 	public ResponseEntity<Object> DeleteCategoryById(
 			@ApiParam(value = "The id of the category", required = true) @PathVariable("id") Integer id) {
 		categoriesApi.delete(id);
-
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
@@ -52,9 +51,9 @@ public class CategoriesApiController {
 	public ResponseEntity<Object> AddCategory(
 			@ApiParam(value = "The id of the category", required = true) @RequestBody Category category) {
 
-	    categoriesApi.save(category);
+	    Category saved = categoriesApi.save(category);
 
-		return new ResponseEntity<Object>(HttpStatus.OK);
+		return new ResponseEntity<Object>(saved, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/categories/byname/{name}", method = RequestMethod.GET)

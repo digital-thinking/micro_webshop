@@ -60,4 +60,15 @@ public class Product {
 		this.details = details;
 	}
 
+	
+	public static Product fromProductDTO(ProductCategoryDTO categoryDTO){
+		Product p = new Product();
+		p.category = categoryDTO.getCategory().getId();
+		p.details = categoryDTO.getDetails();
+		p.id = categoryDTO.getId();
+		p.name = categoryDTO.getName();
+		p.price = categoryDTO.getPrice();
+		return p;
+		
+	}
 }

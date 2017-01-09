@@ -29,14 +29,11 @@ public class ProductClient {
 	public Iterable<Product> getProducts(Double searchmin, Double searchmax, String name, String searchstring) {
 		Collection<Product> products = new HashSet<Product>();
 
-
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://product-service/v1/products")
-				.queryParam("searchmin", searchmin)
-				.queryParam("searchmax", searchmax)
-				.queryParam("name", name)
+				.queryParam("searchmin", searchmin).queryParam("searchmax", searchmax).queryParam("name", name)
 				.queryParam("searchstring", searchstring);
-		
-		Product[] tmpproducts = restTemplate.getForObject(builder.toUriString(), Product[].class);		
+
+		Product[] tmpproducts = restTemplate.getForObject(builder.toUriString(), Product[].class);
 		Collections.addAll(products, tmpproducts);
 		productCache.clear();
 		products.forEach(u -> productCache.put(u.getId(), u));
@@ -58,6 +55,20 @@ public class ProductClient {
 
 	public Product getProductCache(Long productId) {
 		return productCache.getOrDefault(productId, new Product());
+	}
+
+	public Product addProduct(Product p) {
+		if (getProduct(p.getId()) == null) {
+			Product newP = restTemplate.postForObject("http://product-service/v1/products/", p, Product.class);
+			if (newP == null) {
+				return null;
+			} else {
+				productCache.put(newP.getId(), newP);
+				return newP;
+			}
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -49,4 +49,18 @@ public class CategoryClient {
 		return categoryCache.getOrDefault(categoryId, new Category());
 	}
 
+	public Category addCategory(Category category) {
+		Category tmpCategory = getCategory(category.getId());
+		if (tmpCategory == null) {
+			tmpCategory = restTemplate.postForObject("http://category-service/v1/categories/", category,
+					Category.class);
+			if (tmpCategory != null) {
+				categoryCache.put(tmpCategory.getId(), tmpCategory);
+				return tmpCategory;
+			}
+
+		}
+		return tmpCategory;
+	}
+
 }

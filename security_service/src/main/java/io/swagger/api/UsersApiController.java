@@ -51,11 +51,9 @@ public class UsersApiController{
     }
 	
 	@RequestMapping(value = "/users", produces = { "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
-    public ResponseEntity<Void> AddUser(@ApiParam(value = "The user that will be added") @RequestBody User user) {
-		
-		// TODO Da gibt's irgendwie Probleme mit der id, da kann man ihm komischerweise immer nur 0 mitgeben sonst ist es kein "default value" und er meckert
-		usersApi.save(user);		
-        return new ResponseEntity<Void>(HttpStatus.OK);
+    public ResponseEntity<Object> AddUser(@ApiParam(value = "The user that will be added") @RequestBody User user) {				
+		User saved = usersApi.save(user);		
+        return new ResponseEntity<Object>(saved, HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)

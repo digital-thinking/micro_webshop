@@ -52,9 +52,9 @@ public class ProductsApiController {
 	
 	
 	@RequestMapping(value = "/products", produces = { "application/json" }, consumes = { "application/json" }, method = RequestMethod.POST)
-    public ResponseEntity<Void> AddUser(@ApiParam(value = "The product that will be added") @RequestBody Product product) {		
-		productsApi.save(product);		
-		return new ResponseEntity<Void>(HttpStatus.OK);
+    public ResponseEntity<Object> AddProduct(@ApiParam(value = "The product that will be added") @RequestBody Product product) {		
+		Product saved = productsApi.save(product);		
+		return new ResponseEntity<Object>(saved, HttpStatus.OK);
 	}	
 	
 	@RequestMapping(value = "/products/{categoryId}", method = RequestMethod.DELETE)
