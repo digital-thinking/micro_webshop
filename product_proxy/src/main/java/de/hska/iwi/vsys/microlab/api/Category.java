@@ -1,4 +1,4 @@
-package de.hska.iwi.vsys.microlab;
+package de.hska.iwi.vsys.microlab.api;
 
 import java.util.Objects;
 public class Category   {

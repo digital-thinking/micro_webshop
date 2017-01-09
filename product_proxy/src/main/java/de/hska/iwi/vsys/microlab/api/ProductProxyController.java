@@ -1,4 +1,4 @@
-package de.hska.iwi.vsys.microlab;
+package de.hska.iwi.vsys.microlab.api;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiParam;
+
 @RestController
 @EnableCircuitBreaker
 public class ProductProxyController {
@@ -23,6 +25,7 @@ public class ProductProxyController {
 	private CategoryClient categoryClient;
 
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
+	@ApiParam(value = "Test")
 	public ResponseEntity<Iterable<ProductCategoryDTO>> getProducts() {
 		//TODO return ProductCategoryDTO
 		ArrayList<ProductCategoryDTO> categoryDTOs = new ArrayList<>();
