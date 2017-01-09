@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiParam;
@@ -25,12 +26,14 @@ public class ProductProxyController {
 	private CategoryClient categoryClient;
 
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
-	@ApiParam(value = "Test")
-	public ResponseEntity<Iterable<ProductCategoryDTO>> getProducts() {
+	public ResponseEntity<Iterable<ProductCategoryDTO>> getProducts(@ApiParam(value = "Searches for all products with the given string contained in the product descrption.") @RequestParam(value = "searchstring", required = false) String searchstring,
+	        @ApiParam(value = "Searches for all products which are more expencive than given value.") @RequestParam(value = "searchmin", required = false) Double searchmin,
+	        @ApiParam(value = "Searches for all products which are less expencive than given value.") @RequestParam(value = "searchmax", required = false) Double searchmax,
+	        @ApiParam(value = "Lists all products with this name.") @RequestParam(value = "name", required = false) String name) {
 		//TODO return ProductCategoryDTO
 		ArrayList<ProductCategoryDTO> categoryDTOs = new ArrayList<>();
 		ProductCategoryDTO dto = null;
-		for (Product p : productClient.getProducts()){
+		for (Product p : productClient.getProducts(searchmin, searchmax, name, searchstring)){
 			if (p != null)
 			{
 				Category c = categoryClient.getCategory(p.getCategory());
