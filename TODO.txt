@@ -1,7 +1,5 @@
-Alle servies: save (update, add) -> Sebastian
-ProductProxy -> Chris
-UserProxy -> Simon
+UserProxy, ProductProxy -> Simon
 
-OAUTH2 Server -> Chris
+OAUTH2 -> Chris
 OAUTH Client -> Alle
 
