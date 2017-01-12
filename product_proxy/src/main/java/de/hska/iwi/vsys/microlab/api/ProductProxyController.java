@@ -61,7 +61,7 @@ public class ProductProxyController {
 	}
 
 	@RequestMapping(value = "/products", method = RequestMethod.POST)
-	public ResponseEntity<String> AddUser(
+	public ResponseEntity<Object> AddUser(
 			@ApiParam(value = "The product that will be added") @RequestBody ProductCategoryDTO productCategoryDTO) {
 		Category createdOrExistingCat = categoryClient.addCategory(productCategoryDTO.getCategory());
 		if (createdOrExistingCat == null) {
@@ -72,6 +72,7 @@ public class ProductProxyController {
 		if (createdOrExistingProd == null) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Product " + productCategoryDTO);
 		}
-		return new ResponseEntity<String>(HttpStatus.OK);
+		productCategoryDTO = new ProductCategoryDTO(createdOrExistingProd, createdOrExistingCat);
+		return new ResponseEntity<Object>(productCategoryDTO, HttpStatus.OK);
 	}
 }
