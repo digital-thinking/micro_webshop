@@ -1,0 +1,16 @@
+server:
+  ConnectTimeout: 30000
+  ReadTimeout: 30000
+  port: 8010
+spring:
+  application:
+    name: auth-server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+    metadataMap:
+      instanceId: "${spring.application.name}:${random.value}"
