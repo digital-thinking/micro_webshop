@@ -4,7 +4,7 @@ server:
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
-    statusPageUrlPath: /info
+    statusPageUrlPath: /routes
     healthCheckUrlPath: /health    
    
 zuul:
@@ -13,7 +13,7 @@ zuul:
     user-proxy: /user-api/**
     product-proxy: /product-api/**
     auth-server:
-      path: /uaa/**
+      path: /auth/**
       stripPrefix: false
   ConnectTimeout: 30000  
   ReadTimeout: 30000
