@@ -75,4 +75,15 @@ public class ProductProxyController {
 		productCategoryDTO = new ProductCategoryDTO(createdOrExistingProd, createdOrExistingCat);
 		return new ResponseEntity<Object>(productCategoryDTO, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/categories", method = RequestMethod.GET)
+	public ResponseEntity<Iterable<Category>> GetCategories() {
+		ArrayList<Category> categories = new ArrayList<>();
+		
+		for (Category c : categoryClient.getCategorys()){
+			categories.add(c);
+		}
+
+		return new ResponseEntity<Iterable<Category>>(categories, HttpStatus.OK);
+	}
 }
