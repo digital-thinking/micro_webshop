@@ -13,7 +13,25 @@ zuul:
     user-proxy: /user-api/**
     product-proxy: /product-api/**
     auth-server:
+      sensitiveHeaders:
       path: /auth/**
       stripPrefix: false
-  ConnectTimeout: 30000  
-  ReadTimeout: 30000
+          
+security:  
+  basic:
+    enabled: false
+  oauth2:
+    sso:
+      loginPath: /login
+    client:
+      accessTokenUri: http://192.168.99.1:8081/auth/oauth/token
+      userAuthorizationUri: http://192.168.99.1:8081/auth/oauth/authorize      
+      clientId: acme
+      clientSecret: acmesecret
+      grantType: authorization_code
+    resource:
+      userInfoUri: http://192.168.99.1:8081/auth/user
+
+      
+logging:
+  level.org.springframework.security: DEBUG
