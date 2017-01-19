@@ -86,4 +86,12 @@ public class ProductProxyController {
 
 		return new ResponseEntity<Iterable<Category>>(categories, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/categories", method = RequestMethod.POST)
+	public ResponseEntity<Object> AddCategory(
+			@ApiParam(value = "The category to add", required = true) @RequestBody Category category) {
+		Category saved = categoryClient.addCategory(category);
+		
+		return new ResponseEntity<Object>(saved, HttpStatus.OK);
+	}
 }
