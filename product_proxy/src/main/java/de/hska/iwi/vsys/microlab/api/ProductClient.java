@@ -70,5 +70,9 @@ public class ProductClient {
 			return null;
 		}
 	}
+	
+	public void DeleteProduct(Long id) {
+		productCache.remove(id);
+	}
 
 }
