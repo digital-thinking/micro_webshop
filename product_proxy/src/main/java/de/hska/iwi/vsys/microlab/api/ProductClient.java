@@ -72,6 +72,9 @@ public class ProductClient {
 	}
 	
 	public void DeleteProduct(Long id) {
+		Map<String, Long> params = new HashMap<String, Long>();
+		params.put("id", id);
+		restTemplate.delete("http://product-service/v1/products/", params);
 		productCache.remove(id);
 	}
 

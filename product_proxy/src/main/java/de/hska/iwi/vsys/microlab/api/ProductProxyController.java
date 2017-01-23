@@ -97,8 +97,8 @@ public class ProductProxyController {
 	
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteProduct(
-			@ApiParam(value = "The Id of the product to delete", required = true) @PathVariable Long id) {
-		productClient.DeleteProduct(id);
+			@ApiParam(value = "The Id of the product to delete", required = true) @PathVariable Long productId) {
+		productClient.DeleteProduct(productId);
 		
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
