@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: product-proxy
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:8081/auth/user
+      preferTokenInfo: false
 eureka:
   client:
     serviceUrl:
